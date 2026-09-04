@@ -11,6 +11,7 @@ import {
 
 import {
   Plus,
+  Menu,
   Search,
   ChevronDown,
   Users,
@@ -86,6 +87,28 @@ function Dashboard() {
 
   const [activities, setActivities] =
     useState([]);
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] =
+    useState(false);
+
+  useEffect(() => {
+    function handleEscape(event) {
+      if (event.key === "Escape") {
+        setIsMobileMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("keydown", handleEscape);
+
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
 
   const [
     selectedDependencyTaskId,
@@ -2016,10 +2039,41 @@ function Dashboard() {
 
     <div className="dashboard-layout">
 
-      <Sidebar />
+      <Sidebar
+        onClose={() =>
+          setIsMobileMenuOpen(false)
+        }
+        isMobileMenuOpen={
+          isMobileMenuOpen
+        }
+      />
+
+      {isMobileMenuOpen && (
+        <button
+          type="button"
+          className="mobile-menu-overlay"
+          onClick={() =>
+            setIsMobileMenuOpen(false)
+          }
+          aria-label="Close navigation menu"
+        />
+      )}
 
 
       <main className="dashboard-main">
+
+        <button
+          type="button"
+          className="mobile-menu-toggle"
+          onClick={() =>
+            setIsMobileMenuOpen(true)
+          }
+          aria-label="Open navigation menu"
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="taskflow-navigation"
+        >
+          <Menu size={21} />
+        </button>
 
 
         {/* ===================================

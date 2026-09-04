@@ -17,11 +17,15 @@ import {
   GitBranch,
   Users,
   Mail,
+  X,
 } from "lucide-react";
 
 import { supabase } from "../lib/supabase";
 
-function Sidebar() {
+function Sidebar({
+  onClose,
+  isMobileMenuOpen = false,
+}) {
   const location = useLocation();
 
   const navigate =
@@ -60,13 +64,21 @@ function Sidebar() {
   }
 
   return (
-    <aside className="sidebar">
+    <aside
+      id="taskflow-navigation"
+      className={`sidebar mobile-sidebar ${
+        isMobileMenuOpen
+          ? "mobile-sidebar-open"
+          : ""
+      }`}
+    >
 
       {/* LOGO */}
 
       <Link
         to="/dashboard"
         className="sidebar-logo"
+        onClick={onClose}
       >
         <CheckSquare size={28} />
 
@@ -75,9 +87,21 @@ function Sidebar() {
         </span>
       </Link>
 
+      <button
+        type="button"
+        className="mobile-sidebar-close"
+        onClick={onClose}
+        aria-label="Close navigation menu"
+      >
+        <X size={20} />
+      </button>
+
       {/* NAVIGATION */}
 
-      <nav className="sidebar-nav">
+      <nav
+        className="sidebar-nav"
+        onClick={onClose}
+      >
 
         {/* DASHBOARD */}
 
