@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: "Outfit", Arial, sans-serif;
+  background: #050b14;
+  color: #f8fafc;
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.16;
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::before {
+  background: #20e3d2;
+  top: -180px;
+  left: -160px;
+  animation: floatGlow 10s ease-in-out infinite;
+}
+
+body::after {
+  background: #38bdf8;
+  right: -180px;
+  bottom: -180px;
+  animation: floatGlow 12s ease-in-out infinite reverse;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+@keyframes floatGlow {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(70px, 50px);
+  }
+}
