@@ -13694,3 +13694,103 @@ body,
     font-size: 10px;
   }
 }
+
+/* =========================================
+   MOBILE DRAWER CASCADE FIX
+========================================= */
+
+@media (max-width: 768px) {
+  .dashboard-main {
+    padding-top: 72px;
+  }
+
+  .mobile-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 1200;
+    width: min(310px, 86vw);
+    height: 100dvh;
+    max-height: 100dvh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: calc(18px + env(safe-area-inset-top)) 16px
+      calc(16px + env(safe-area-inset-bottom));
+    overflow-x: hidden;
+    overflow-y: auto;
+    transform: translateX(-105%);
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .mobile-sidebar.mobile-sidebar-open {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .mobile-sidebar .sidebar-logo {
+    justify-content: flex-start;
+    flex-shrink: 0;
+    padding: 4px 56px 4px 4px;
+  }
+
+  .mobile-sidebar .sidebar-logo span {
+    display: inline;
+    font-size: 20px;
+  }
+
+  .mobile-sidebar .sidebar-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    flex: 1;
+    align-content: start;
+    gap: 6px;
+    width: 100%;
+    max-width: none;
+    margin-top: 24px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-sidebar .sidebar-link {
+    width: 100%;
+    min-height: 44px;
+    justify-content: flex-start;
+    padding: 9px 10px;
+    gap: 9px;
+    font-size: 12px;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .mobile-sidebar .sidebar-link span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mobile-sidebar .sidebar-bottom {
+    display: block;
+    flex-shrink: 0;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(148, 163, 184, 0.12);
+  }
+}
+
+@media (max-width: 375px), (max-height: 700px) and (max-width: 768px) {
+  .dashboard-main {
+    padding-top: 68px;
+  }
+
+  .mobile-sidebar {
+    padding-top: calc(14px + env(safe-area-inset-top));
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+
+  .mobile-sidebar .sidebar-nav {
+    gap: 4px;
+    margin-top: 18px;
+  }
+}
